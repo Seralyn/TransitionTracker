@@ -9,7 +9,7 @@
   <meta property="og:description" content="Track your transition. Power better research. Your data, your call." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/og-image.png" />
-  <meta name="theme-color" content="#1F2430" />
+  <meta name="theme-color" content="#262A33" />
 
   <link rel="preconnect" href="https://cdn.tailwindcss.com">
   <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
@@ -18,13 +18,11 @@
       theme: {
         extend: {
           colors: {
-            // Preview-aligned tones
-            graphite: '#1F2430',          // headings
-            softText: '#5B6675',          // paragraph body
-            mediumBlue: '#6F8FB8',        // links / accents
+            softBlack: '#262A33',     // softer-than-black headings
+            softText:  '#5B6675',     // paragraph/body
+            mediumBlue:'#6F8FB8',     // links/secondary accents
             transBlue: '#A8D8F0',
-            transPink: '#F2B9C5',
-            panel: 'rgba(255,255,255,0.82)'
+            transPink: '#F2B9C5'
           },
           boxShadow: {
             glass: '0 12px 40px rgba(17, 24, 39, 0.12)'
@@ -33,106 +31,85 @@
             '2xl': '1.25rem',
             '3xl': '1.75rem'
           },
-          backdropBlur: {
-            20: '20px'
-          },
+          backdropBlur: { 20: '20px' },
           keyframes: {
-            shimmer: {
-              '0%':   { backgroundPosition: '0% 50%' },
-              '100%': { backgroundPosition: '100% 50%' }
-            }
+            shimmer: { '0%': {backgroundPosition:'0% 50%'}, '100%': {backgroundPosition:'100% 50%'} }
           },
-          animation: {
-            shimmer: 'shimmer 50s ease-in-out infinite'
-          }
+          animation: { shimmer: 'shimmer 50s ease-in-out infinite' }
         }
       }
     }
   </script>
 
   <style>
-    /* --- Background: clearer blue→pink like the preview --- */
-    body {
-      /* base gradient */
+    /* --- Stronger pink presence in the background --- */
+    body{
       background-image:
-        radial-gradient(1200px 800px at 20% 10%, rgba(168,216,240,0.55), rgba(168,216,240,0) 60%),
-        radial-gradient(1200px 800px at 85% 90%, rgba(242,185,197,0.55), rgba(242,185,197,0) 60%),
-        linear-gradient(135deg, #B9E4FA 0%, #F6C8D3 100%);
-      background-attachment: fixed, fixed, fixed;
-      background-size: auto, auto, 400% 400%;
+        radial-gradient(1100px 800px at 85% 20%, rgba(242,185,197,0.70), rgba(242,185,197,0) 62%),
+        radial-gradient(1200px 900px at 15% 85%, rgba(168,216,240,0.55), rgba(168,216,240,0) 60%),
+        linear-gradient(135deg, #B9E4FA 0%, #F4BED0 55%, #F2B9C5 100%);
+      background-attachment: fixed,fixed,fixed;
+      background-size: auto,auto,400% 400%;
       animation: shimmer 50s ease-in-out infinite;
     }
 
-    /* softer dotted field */
-    .bg-grid {
-      background-image: radial-gradient(rgba(31,36,48,0.08) 1px, transparent 1px);
-      background-size: 14px 14px; /* tighter, subtler */
-      opacity: .35;
+    /* dotted field */
+    .bg-grid{
+      background-image: radial-gradient(rgba(38,42,51,0.08) 1px, transparent 1px);
+      background-size: 14px 14px;
+      opacity:.35;
     }
 
-    /* Gradient hairline border seen in preview */
-    .gradient-border {
-      position: relative;
-      border-radius: 1rem;
-    }
-    .gradient-border::before {
-      content: "";
-      position: absolute; inset: 0;
-      border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(90deg, #A8D8F0, #F2B9C5);
-      -webkit-mask: 
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-              mask-composite: exclude;
-      pointer-events: none;
-      opacity: .7;
+    /* reusable frosted glass surface */
+    .glass{
+      background: rgba(255,255,255,0.68);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(255,255,255,0.65);
+      box-shadow: 0 12px 40px rgba(17,24,39,0.12);
     }
 
-    /* Links in medium blue like the mock */
-    .link {
-      color: #6F8FB8;
-    }
-    .link:hover {
-      color: #5377A2;
+    /* lighter frosted variant (for inner elements) */
+    .glass-soft{
+      background: rgba(255,255,255,0.58);
+      backdrop-filter: blur(18px) saturate(150%);
+      -webkit-backdrop-filter: blur(18px) saturate(150%);
+      border: 1px solid rgba(255,255,255,0.55);
+      box-shadow: 0 10px 26px rgba(17,24,39,0.10);
     }
 
-    ::selection { background: rgba(168,216,240,0.35); }
+    /* subtle gradient hairline border */
+    .gradient-border{ position:relative; border-radius:1rem; }
+    .gradient-border::before{
+      content:""; position:absolute; inset:0; border-radius:inherit; padding:1px;
+      background: linear-gradient(90deg,#A8D8F0,#F2B9C5);
+      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none; opacity:.7;
+    }
+
+    .link{ color:#6F8FB8; }
+    .link:hover{ color:#5377A2; }
+    ::selection{ background:rgba(168,216,240,0.35); }
   </style>
-
-  <!-- JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "TransitionTracker",
-    "operatingSystem": "iOS",
-    "applicationCategory": "HealthApplication",
-    "description": "Anonymous, opt-in tracking for transgender health with research-ready exports.",
-    "creator": {"@type":"Person","name":"Seralyn Campbell"},
-    "offers": {"@type":"Offer","price":"0"}
-  }
-  </script>
 </head>
 
-<body class="text-graphite">
-  <!-- Header (lighter, frosted bar) -->
-  <header class="sticky top-0 z-30 border-b border-white/40 backdrop-blur-20 bg-white/60">
+<body class="text-softBlack">
+  <!-- Header -->
+  <header class="sticky top-0 z-30 glass border-b border-white/60">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <a href="#top" class="flex items-center gap-3">
-        <span class="inline-flex h-8 w-8 rounded-xl bg-white/80 backdrop-blur-20 items-center justify-center font-bold text-graphite shadow-glass gradient-border">TT</span>
+        <span class="inline-flex h-8 w-8 rounded-xl glass items-center justify-center font-bold text-softBlack gradient-border">TT</span>
         <span class="font-semibold">TransitionTracker</span>
       </a>
       <nav class="hidden md:flex gap-6 text-sm text-softText">
-        <a href="#why" class="hover:text-graphite">Why</a>
-        <a href="#how" class="hover:text-graphite">How it works</a>
-        <a href="#privacy" class="hover:text-graphite">Privacy</a>
-        <a href="#research" class="hover:text-graphite">For researchers</a>
-        <a href="#faq" class="hover:text-graphite">FAQ</a>
-        <a href="#contact" class="hover:text-graphite">Contact</a>
+        <a href="#why" class="hover:text-softBlack">Why</a>
+        <a href="#how" class="hover:text-softBlack">How it works</a>
+        <a href="#privacy" class="hover:text-softBlack">Privacy</a>
+        <a href="#research" class="hover:text-softBlack">For researchers</a>
+        <a href="#faq" class="hover:text-softBlack">FAQ</a>
+        <a href="#contact" class="hover:text-softBlack">Contact</a>
       </nav>
-      <a href="#cta" class="ml-4 inline-flex items-center px-4 py-2 rounded-xl bg-white/80 backdrop-blur-20 text-graphite shadow-glass gradient-border hover:bg-white">Get updates</a>
+      <a href="#cta" class="ml-4 inline-flex items-center px-4 py-2 rounded-xl glass text-softBlack gradient-border hover:bg-white/80">Get updates</a>
     </div>
   </header>
 
@@ -147,55 +124,56 @@
           </h1>
           <p class="mt-4 leading-relaxed text-softText">
             TransitionTracker helps you log mood, energy, dysphoria, sleep, activity, and optional voice metrics. With explicit consent, you can share
-            <span class="font-semibold text-graphite">anonymous</span>, <span class="font-semibold text-graphite">research-ready</span> data to improve care worldwide.
+            <span class="font-semibold text-softBlack">anonymous</span>, <span class="font-semibold text-softBlack">research-ready</span> data to improve care worldwide.
             <span class="italic"> At your own pace, only when you want.</span>
           </p>
           <div class="mt-6 flex flex-wrap gap-3">
-            <a href="#cta" class="px-5 py-3 rounded-xl bg-white/85 backdrop-blur-20 text-graphite shadow-glass gradient-border hover:bg-white">Join the waitlist</a>
-            <a href="#privacy" class="px-5 py-3 rounded-xl bg-white/70 backdrop-blur-20 text-graphite shadow-glass hover:bg-white/80">See privacy first</a>
+            <a href="#cta" class="px-5 py-3 rounded-xl glass text-softBlack gradient-border hover:bg-white/80">Join the waitlist</a>
+            <a href="#privacy" class="px-5 py-3 rounded-xl glass-soft text-softBlack hover:bg-white/70">See privacy first</a>
           </div>
           <p class="mt-3 text-xs text-softText/90">iOS first. Android planned.</p>
         </div>
 
-        <!-- Phone mock: glassy with blue/pink glow -->
+        <!-- Phone mock -->
         <div class="relative">
-          <div class="aspect-[9/19] rounded-[2rem] border border-white/60 shadow-glass bg-white/70 backdrop-blur-20 mx-auto w-72 md:w-80 p-3 gradient-border">
-            <div class="h-full w-full rounded-[1.6rem] bg-white/75 backdrop-blur-20 flex items-center justify-center text-center p-6">
+          <div class="aspect-[9/19] rounded-[2rem] glass mx-auto w-72 md:w-80 p-3 gradient-border">
+            <div class="h-full w-full rounded-[1.6rem] glass-soft flex items-center justify-center text-center p-6">
               <div>
                 <div class="text-sm uppercase tracking-widest text-softText">Onboarding • Opt-in</div>
                 <div class="mt-2 text-2xl font-semibold">Share anonymously?</div>
                 <p class="mt-2 text-sm text-softText">You’re in control. Review what’s collected and toggle off anything you don’t want. Change your mind anytime.</p>
                 <div class="mt-4 grid grid-cols-2 gap-2 text-xs">
-                  <span class="px-3 py-2 rounded-lg bg-white/90 border border-white/70">Mood / Energy</span>
-                  <span class="px-3 py-2 rounded-lg bg-white/90 border border-white/70">Sleep / HRV</span>
-                  <span class="px-3 py-2 rounded-lg bg-white/90 border border-white/70">Activity</span>
-                  <span class="px-3 py-2 rounded-lg bg-white/90 border border-white/70">Voice (optional)</span>
+                  <span class="px-3 py-2 rounded-lg glass-soft">Mood / Energy</span>
+                  <span class="px-3 py-2 rounded-lg glass-soft">Sleep / HRV</span>
+                  <span class="px-3 py-2 rounded-lg glass-soft">Activity</span>
+                  <span class="px-3 py-2 rounded-lg glass-soft">Voice (optional)</span>
                 </div>
                 <a href="#privacy" class="mt-4 inline-block link text-sm">See what’s shared</a>
               </div>
             </div>
           </div>
+          <!-- trans glow -->
           <div class="absolute -z-10 blur-3xl rounded-full w-64 h-64 left-1/2 -translate-x-1/2 top-10"
-               style="background: radial-gradient(closest-side, rgba(168,216,240,0.55), rgba(242,185,197,0.40));"></div>
+               style="background: radial-gradient(closest-side, rgba(168,216,240,0.55), rgba(242,185,197,0.55));"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Why (cards match preview: soft gray text, glass panels, subtle border) -->
+  <!-- Why -->
   <section id="why" class="py-16">
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-2xl font-bold">Why TransitionTracker?</h2>
       <div class="mt-8 grid md:grid-cols-3 gap-6">
-        <div class="p-6 bg-[color:var(--panel,rgba(255,255,255,.82))] bg-white/80 backdrop-blur-20 border border-white/60 rounded-2xl shadow-glass gradient-border">
+        <div class="p-6 rounded-2xl glass gradient-border">
           <h3 class="font-semibold">For you</h3>
           <p class="mt-2 text-sm text-softText">See trends across mood, dysphoria, sleep, and more. Celebrate progress. Spot patterns. 自分を知る — know yourself.</p>
         </div>
-        <div class="p-6 bg-white/80 backdrop-blur-20 border border-white/60 rounded-2xl shadow-glass gradient-border">
+        <div class="p-6 rounded-2xl glass gradient-border">
           <h3 class="font-semibold">For community</h3>
           <p class="mt-2 text-sm text-softText">Opt-in, anonymous contribution helps build better guidelines, with real-world data from real lives.</p>
         </div>
-        <div class="p-6 bg-white/80 backdrop-blur-20 border border-white/60 rounded-2xl shadow-glass gradient-border">
+        <div class="p-6 rounded-2xl glass gradient-border">
           <h3 class="font-semibold">For research</h3>
           <p class="mt-2 text-sm text-softText">Data schema co-designed with academic partners so your contribution is genuinely useful — not just another dataset.</p>
         </div>
@@ -208,9 +186,9 @@
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-2xl font-bold">How it works</h2>
       <ol class="mt-6 grid md:grid-cols-3 gap-6 text-sm">
-        <li class="p-6 bg-white/80 backdrop-blur-20 rounded-2xl border border-white/60 shadow-glass gradient-border"><span class="font-semibold">1) Opt-in</span><br/>Choose exactly what to share. No raw audio, no GPS, no email.</li>
-        <li class="p-6 bg-white/80 backdrop-blur-20 rounded-2xl border border-white/60 shadow-glass gradient-border"><span class="font-semibold">2) Track</span><br/>Quick daily check-ins + HealthKit metrics; optional weekly voice sample (derived features only).</li>
-        <li class="p-6 bg-white/80 backdrop-blur-20 rounded-2xl border border-white/60 shadow-glass gradient-border"><span class="font-semibold">3) Contribute</span><br/>Data is anonymized on export and encrypted in transit to approved research partners.</li>
+        <li class="p-6 rounded-2xl glass gradient-border"><span class="font-semibold">1) Opt-in</span><br/>Choose exactly what to share. No raw audio, no GPS, no email.</li>
+        <li class="p-6 rounded-2xl glass gradient-border"><span class="font-semibold">2) Track</span><br/>Quick daily check-ins + HealthKit metrics; optional weekly voice sample (derived features only).</li>
+        <li class="p-6 rounded-2xl glass gradient-border"><span class="font-semibold">3) Contribute</span><br/>Data is anonymized on export and encrypted in transit to approved research partners.</li>
       </ol>
     </div>
   </section>
@@ -220,16 +198,16 @@
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-2xl font-bold">Privacy by design</h2>
       <div class="mt-6 grid md:grid-cols-2 gap-6 text-sm">
-        <ul class="space-y-3 p-6 bg-white/80 backdrop-blur-20 rounded-2xl border border-white/60 shadow-glass gradient-border text-softText">
-          <li>• <strong class="text-graphite">No raw audio exported</strong> — only derived voice features (e.g., mean F0).</li>
-          <li>• <strong class="text-graphite">No GPS / IP / email</strong> in research exports.</li>
-          <li>• <strong class="text-graphite">Explicit consent</strong> at onboarding; revocable anytime.</li>
-          <li>• <strong class="text-graphite">GDPR-aligned</strong> anonymization and DUAs with partners.</li>
+        <ul class="space-y-3 p-6 rounded-2xl glass gradient-border text-softText">
+          <li>• <strong class="text-softBlack">No raw audio exported</strong> — only derived voice features (e.g., mean F0).</li>
+          <li>• <strong class="text-softBlack">No GPS / IP / email</strong> in research exports.</li>
+          <li>• <strong class="text-softBlack">Explicit consent</strong> at onboarding; revocable anytime.</li>
+          <li>• <strong class="text-softBlack">GDPR-aligned</strong> anonymization and DUAs with partners.</li>
         </ul>
-        <ul class="space-y-3 p-6 bg-white/80 backdrop-blur-20 rounded-2xl border border-white/60 shadow-glass gradient-border text-softText">
-          <li>• <strong class="text-graphite">Local encryption</strong> + encrypted transfer.</li>
-          <li>• <strong class="text-graphite">Transparency</strong> — see exactly what leaves your device.</li>
-          <li>• <strong class="text-graphite">Open docs</strong> — public data dictionary and changelog.</li>
+        <ul class="space-y-3 p-6 rounded-2xl glass gradient-border text-softText">
+          <li>• <strong class="text-softBlack">Local encryption</strong> + encrypted transfer.</li>
+          <li>• <strong class="text-softBlack">Transparency</strong> — see exactly what leaves your device.</li>
+          <li>• <strong class="text-softBlack">Open docs</strong> — public data dictionary and changelog.</li>
           <li>• <a href="/TransitionTracker_Data_Schema_Summary.pdf" class="link underline">Download schema summary (PDF)</a></li>
         </ul>
       </div>
@@ -242,20 +220,20 @@
       <h2 class="text-2xl font-bold">For researchers</h2>
       <p class="mt-3 text-sm text-softText">We welcome collaboration on metrics, ethics, and analysis. Get the one-pager below or contact us for DUAs/IRB alignment.</p>
       <div class="mt-6 flex flex-wrap gap-3">
-        <a href="/TransitionTracker_Cover_Letter.pdf" class="px-5 py-3 rounded-xl bg-white/85 backdrop-blur-20 text-graphite shadow-glass gradient-border hover:bg-white">Cover letter (PDF)</a>
-        <a href="/TransitionTracker_Data_Schema_Summary.pdf" class="px-5 py-3 rounded-xl bg-white/70 backdrop-blur-20 text-graphite shadow-glass hover:bg-white/80">Data schema (PDF)</a>
-        <a href="#contact" class="px-5 py-3 rounded-xl bg-white/85 backdrop-blur-20 text-graphite shadow-glass gradient-border hover:bg-white">Start a conversation</a>
+        <a href="/TransitionTracker_Cover_Letter.pdf" class="px-5 py-3 rounded-xl glass text-softBlack gradient-border hover:bg-white/80">Cover letter (PDF)</a>
+        <a href="/TransitionTracker_Data_Schema_Summary.pdf" class="px-5 py-3 rounded-xl glass-soft text-softBlack hover:bg-white/70">Data schema (PDF)</a>
+        <a href="#contact" class="px-5 py-3 rounded-xl glass text-softBlack gradient-border hover:bg-white/80">Start a conversation</a>
       </div>
       <div class="mt-8 grid md:grid-cols-3 gap-6 text-sm">
-        <div class="p-5 bg-white/80 backdrop-blur-20 border border-white/60 rounded-2xl shadow-glass gradient-border">
+        <div class="p-5 rounded-2xl glass gradient-border">
           <div class="font-semibold">Data export</div>
           <p class="mt-1 text-softText">CSV/JSON, dictionary included; no direct identifiers; variable set versioned.</p>
         </div>
-        <div class="p-5 bg-white/80 backdrop-blur-20 border border-white/60 rounded-2xl shadow-glass gradient-border">
+        <div class="p-5 rounded-2xl glass gradient-border">
           <div class="font-semibold">Sampling</div>
           <p class="mt-1 text-softText">Daily self-report + passive HealthKit; weekly derived voice features; monthly psychosocial.</p>
         </div>
-        <div class="p-5 bg-white/80 backdrop-blur-20 border border-white/60 rounded-2xl shadow-glass gradient-border">
+        <div class="p-5 rounded-2xl glass gradient-border">
           <div class="font-semibold">Governance</div>
           <p class="mt-1 text-softText">Participant consent, revocation, and public governance notes; partner IRB oversight.</p>
         </div>
@@ -268,19 +246,19 @@
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-2xl font-bold">FAQ</h2>
       <div class="mt-6 grid md:grid-cols-2 gap-6 text-sm">
-        <div class="p-5 bg-white/80 backdrop-blur-20 border border-white/60 rounded-2xl shadow-glass gradient-border">
+        <div class="p-5 rounded-2xl glass gradient-border">
           <div class="font-semibold">Is my data anonymous?</div>
           <p class="mt-1 text-softText">Yes. We export only anonymized data: no names, emails, IP, or GPS. Voice exports are derived features only.</p>
         </div>
-        <div class="p-5 bg-white/80 backdrop-blur-20 border border-white/60 rounded-2xl shadow-glass gradient-border">
+        <div class="p-5 rounded-2xl glass gradient-border">
           <div class="font-semibold">Can I opt out later?</div>
           <p class="mt-1 text-softText">Absolutely. You can revoke research sharing at any time from Settings → Privacy.</p>
         </div>
-        <div class="p-5 bg-white/80 backdrop-blur-20 border border-white/60 rounded-2xl shadow-glass gradient-border">
+        <div class="p-5 rounded-2xl glass gradient-border">
           <div class="font-semibold">Who sees the data?</div>
           <p class="mt-1 text-softText">Only vetted research partners under a Data Use Agreement and IRB oversight.</p>
         </div>
-        <div class="p-5 bg-white/80 backdrop-blur-20 border border-white/60 rounded-2xl shadow-glass gradient-border">
+        <div class="p-5 rounded-2xl glass gradient-border">
           <div class="font-semibold">Do you share results back?</div>
           <p class="mt-1 text-softText">We aim for open summaries and community-readable findings whenever partners can share.</p>
         </div>
@@ -291,18 +269,18 @@
   <!-- CTA -->
   <section id="cta" class="py-16">
     <div class="max-w-6xl mx-auto px-4">
-      <div class="bg-white/75 backdrop-blur-20 rounded-3xl border border-white/60 shadow-glass gradient-border p-8">
+      <div class="rounded-3xl glass gradient-border p-8">
         <div class="grid md:grid-cols-2 gap-8 items-center">
           <div>
             <h2 class="text-3xl font-bold">Be first to know</h2>
             <p class="mt-2 text-softText">Join the early access list. No spam — just meaningful updates and opt-in invitations.</p>
           </div>
-          <form class="bg-white/70 backdrop-blur-20 p-4 rounded-2xl border border-white/60" netlify name="waitlist" netlify-honeypot="bot-field">
+          <form class="glass-soft p-4 rounded-2xl" netlify name="waitlist" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="waitlist">
             <input type="text" name="bot-field" class="hidden" />
             <label class="block text-sm mb-2" for="email">Email</label>
-            <input id="email" name="email" type="email" required class="w-full px-4 py-3 rounded-xl text-graphite border border-white/70 bg-white/90" placeholder="you@example.com" />
-            <button type="submit" class="mt-3 w-full px-4 py-3 rounded-xl bg-white/85 backdrop-blur-20 text-graphite shadow-glass gradient-border hover:bg-white">Join waitlist</button>
+            <input id="email" name="email" type="email" required class="w-full px-4 py-3 rounded-xl text-softBlack border border-white/70 bg-white/90" placeholder="you@example.com" />
+            <button type="submit" class="mt-3 w-full px-4 py-3 rounded-xl glass text-softBlack gradient-border hover:bg-white/85">Join waitlist</button>
             <p class="mt-2 text-xs text-softText">By submitting, you agree to our <a href="#privacy" class="link underline">privacy notice</a>.</p>
           </form>
         </div>
@@ -316,24 +294,24 @@
       <h2 class="text-2xl font-bold">Contact</h2>
       <p class="mt-2 text-sm text-softText">Researchers: request the data dictionary, DUAs, or an intro call. Media: request the press kit.</p>
       <div class="mt-4 flex flex-wrap gap-3 text-sm">
-        <a class="px-5 py-3 rounded-xl bg-white/85 backdrop-blur-20 border border-white/60 shadow-glass gradient-border" href="mailto:hello@transitiontracker.app">hello@transitiontracker.app</a>
-        <a class="px-5 py-3 rounded-xl bg-white/75 backdrop-blur-20 border border-white/60 shadow-glass" href="/press-kit.zip">Press kit</a>
+        <a class="px-5 py-3 rounded-xl glass text-softBlack gradient-border hover:bg-white/85" href="mailto:hello@transitiontracker.app">hello@transitiontracker.app</a>
+        <a class="px-5 py-3 rounded-xl glass-soft hover:bg-white/70" href="/press-kit.zip">Press kit</a>
       </div>
     </div>
   </section>
 
-  <!-- Simple legal placeholders -->
+  <!-- Legal -->
   <section id="privacy-policy" class="py-16 max-w-6xl mx-auto px-4 text-sm text-softText">
-    <h2 class="font-semibold text-graphite">Privacy Policy</h2>
+    <h2 class="font-semibold text-softBlack">Privacy Policy</h2>
     <p class="mt-2">We ensure your data remains anonymous and that you can revoke consent at any time. Your privacy is our priority.</p>
   </section>
 
   <section id="terms" class="py-16 max-w-6xl mx-auto px-4 text-sm text-softText">
-    <h2 class="font-semibold text-graphite">Terms of Use</h2>
+    <h2 class="font-semibold text-softBlack">Terms of Use</h2>
     <p class="mt-2">This app is provided as-is with no warranties. Use it responsibly and understand that we are not liable for any issues arising from its use.</p>
   </section>
 
-  <footer class="py-10 border-t border-white/50 backdrop-blur-20 bg-white/40">
+  <footer class="py-10 glass border-t border-white/60">
     <div class="max-w-6xl mx-auto px-4 text-xs text-softText flex flex-wrap items-center justify-between gap-3">
       <div>© <span id="year"></span> TransitionTracker • Built with privacy first • Barcelona</div>
       <div class="flex gap-4">
@@ -344,8 +322,6 @@
     </div>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
