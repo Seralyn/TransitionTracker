@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TransitionTracker — Opt‑in, Anonymous, Research‑Ready</title>
-  <meta name="description" content="TransitionTracker helps trans people track their journey and, with consent, share anonymous, research‑ready data to advance care." />
-  <meta property="og:title" content="TransitionTracker — Opt‑in, Anonymous, Research‑Ready" />
+  <title>TransitionTracker — Opt-in, Anonymous, Research-Ready</title>
+  <meta name="description" content="TransitionTracker helps trans people track their journey and, with consent, share anonymous, research-ready data to advance care." />
+  <meta property="og:title" content="TransitionTracker — Opt-in, Anonymous, Research-Ready" />
   <meta property="og:description" content="Track your transition. Power better research. Your data, your call." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/og-image.png" />
-  <meta name="theme-color" content="#3d405b" />
+  <meta name="theme-color" content="#1F1F23" />
 
   <link rel="preconnect" href="https://cdn.tailwindcss.com">
   <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
@@ -18,18 +18,70 @@
       theme: {
         extend: {
           colors: {
-            sand: '#f4f1de',
-            peach: '#f2cc8f',
-            teal: '#81b29a',
-            indigo: '#3d405b',
-            coral: '#e07a5f'
+            graphite: '#1F1F23',     // primary text
+            slateink: '#4C4F57',     // secondary text
+            transBlue: '#A8D8F0',
+            transPink: '#F2B9C5',
+            opal: '#D9F2FB'
+          },
+          boxShadow: {
+            glass: '0 4px 20px rgba(0,0,0,0.05)'
+          },
+          borderRadius: {
+            '2xl': '1.25rem',
+            '3xl': '1.75rem'
+          },
+          backdropBlur: {
+            20: '20px'
+          },
+          keyframes: {
+            shimmer: {
+              '0%': { backgroundPosition: '0% 50%' },
+              '100%': { backgroundPosition: '100% 50%' }
+            }
+          },
+          animation: {
+            shimmer: 'shimmer 45s ease infinite'
           }
         }
       }
     }
   </script>
+
   <style>
-    .bg-grid { background-image: radial-gradient(rgba(61,64,91,0.08) 1px, transparent 1px); background-size: 18px 18px; }
+    /* Background: subtle trans gradient + animated shimmer */
+    body {
+      background: linear-gradient(135deg, #A8D8F0 0%, #F2B9C5 100%);
+      background-attachment: fixed;
+      background-size: 400% 400%;
+      animation: shimmer 45s ease infinite;
+    }
+
+    /* Ultra-subtle radial grid to add depth under the glass */
+    .bg-grid {
+      background-image: radial-gradient(rgba(31,31,35,0.07) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+
+    /* Thin gradient borders for buttons/cards (no extra loaders needed) */
+    .gradient-border {
+      position: relative;
+      border-radius: 1rem;
+    }
+    .gradient-border::before {
+      content: "";
+      position: absolute; inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(90deg, #A8D8F0, #F2B9C5);
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box, 
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      pointer-events: none;
+    }
+    ::selection { background: rgba(168,216,240,0.35); }
   </style>
 
   <!-- JSON-LD for basic SEO -->
@@ -46,57 +98,66 @@
   }
   </script>
 </head>
-<body class="bg-sand text-indigo selection:bg-peach/60">
+
+<body class="text-graphite">
   <!-- Header -->
-  <header class="sticky top-0 z-30 backdrop-blur bg-sand/80 border-b border-indigo/10">
+  <header class="sticky top-0 z-30 border-b border-white/20 backdrop-blur-20 bg-white/70">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <a href="#top" class="flex items-center gap-3">
-        <span class="inline-flex h-8 w-8 rounded-xl bg-indigo text-sand items-center justify-center font-bold">TT</span>
+        <span class="inline-flex h-8 w-8 rounded-xl bg-white/80 backdrop-blur-20 items-center justify-center font-bold text-graphite shadow-glass gradient-border">TT</span>
         <span class="font-semibold">TransitionTracker</span>
       </a>
-      <nav class="hidden md:flex gap-6 text-sm">
-        <a href="#why" class="hover:text-coral">Why</a>
-        <a href="#how" class="hover:text-coral">How it works</a>
-        <a href="#privacy" class="hover:text-coral">Privacy</a>
-        <a href="#research" class="hover:text-coral">For researchers</a>
-        <a href="#faq" class="hover:text-coral">FAQ</a>
-        <a href="#contact" class="hover:text-coral">Contact</a>
+      <nav class="hidden md:flex gap-6 text-sm text-slateink">
+        <a href="#why" class="hover:text-graphite">Why</a>
+        <a href="#how" class="hover:text-graphite">How it works</a>
+        <a href="#privacy" class="hover:text-graphite">Privacy</a>
+        <a href="#research" class="hover:text-graphite">For researchers</a>
+        <a href="#faq" class="hover:text-graphite">FAQ</a>
+        <a href="#contact" class="hover:text-graphite">Contact</a>
       </nav>
-      <a href="#cta" class="ml-4 inline-flex items-center px-4 py-2 rounded-xl bg-coral text-white shadow hover:opacity-95">Get updates</a>
+      <a href="#cta" class="ml-4 inline-flex items-center px-4 py-2 rounded-xl bg-white/70 backdrop-blur-20 text-graphite shadow-glass gradient-border hover:bg-white/80">Get updates</a>
     </div>
   </header>
 
   <!-- Hero -->
   <section id="top" class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-grid"></div>
+    <div class="absolute inset-0 bg-grid opacity-60"></div>
     <div class="max-w-6xl mx-auto px-4 pt-16 pb-20 relative">
       <div class="grid md:grid-cols-2 gap-10 items-center">
         <div>
-          <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-indigo">Track your transition. Power better research.</h1>
-          <p class="mt-4 text-indigo/80 leading-relaxed">TransitionTracker helps you log mood, energy, dysphoria, sleep, activity, and optional voice metrics. With explicit consent, you can share <span class="font-semibold">anonymous</span>, <span class="font-semibold">research‑ready</span> data to improve care worldwide. <span class="italic"> At your own pace, only when you want.</span></p>
+          <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Track your transition. Power better research.</h1>
+          <p class="mt-4 text-slateink leading-relaxed">
+            TransitionTracker helps you log mood, energy, dysphoria, sleep, activity, and optional voice metrics. With explicit consent, you can share
+            <span class="font-semibold">anonymous</span>, <span class="font-semibold">research-ready</span> data to improve care worldwide.
+            <span class="italic"> At your own pace, only when you want.</span>
+          </p>
           <div class="mt-6 flex flex-wrap gap-3">
-            <a href="#cta" class="px-5 py-3 rounded-xl bg-indigo text-sand hover:opacity-95">Join the waitlist</a>
-            <a href="#privacy" class="px-5 py-3 rounded-xl bg-peach text-indigo hover:opacity-95">See privacy first</a>
+            <a href="#cta" class="px-5 py-3 rounded-xl bg-white/80 backdrop-blur-20 text-graphite shadow-glass gradient-border hover:bg-white">Join the waitlist</a>
+            <a href="#privacy" class="px-5 py-3 rounded-xl bg-white/60 backdrop-blur-20 text-graphite shadow-glass hover:bg-white/70">See privacy first</a>
           </div>
-          <p class="mt-3 text-xs text-indigo/60">iOS first. Android planned.</p>
+          <p class="mt-3 text-xs text-slateink/80">iOS first. Android planned.</p>
         </div>
+
         <div class="relative">
-          <div class="aspect-[9/19] rounded-[2rem] border border-indigo/20 shadow-xl bg-white mx-auto w-72 md:w-80 p-3">
-            <div class="h-full w-full rounded-[1.6rem] bg-sand/60 flex items-center justify-center text-center p-6">
+          <!-- Phone mock: frosted interior with trans tint glow -->
+          <div class="aspect-[9/19] rounded-[2rem] border border-white/50 shadow-xl bg-white/60 backdrop-blur-20 mx-auto w-72 md:w-80 p-3 gradient-border">
+            <div class="h-full w-full rounded-[1.6rem] bg-white/60 backdrop-blur-20 flex items-center justify-center text-center p-6">
               <div>
-                <div class="text-sm uppercase tracking-widest text-indigo/70">Onboarding • Opt‑in</div>
+                <div class="text-sm uppercase tracking-widest text-slateink/80">Onboarding • Opt-in</div>
                 <div class="mt-2 text-2xl font-semibold">Share anonymously?</div>
-                <p class="mt-2 text-sm text-indigo/70">You’re in control. Review what’s collected and toggle off anything you don’t want. Change your mind anytime.</p>
+                <p class="mt-2 text-sm text-slateink">You’re in control. Review what’s collected and toggle off anything you don’t want. Change your mind anytime.</p>
                 <div class="mt-4 grid grid-cols-2 gap-2 text-xs">
-                  <span class="px-3 py-2 rounded-lg bg-white border">Mood / Energy</span>
-                  <span class="px-3 py-2 rounded-lg bg-white border">Sleep / HRV</span>
-                  <span class="px-3 py-2 rounded-lg bg-white border">Activity</span>
-                  <span class="px-3 py-2 rounded-lg bg-white border">Voice (optional)</span>
+                  <span class="px-3 py-2 rounded-lg bg-white/80 backdrop-blur-20 border border-white/60">Mood / Energy</span>
+                  <span class="px-3 py-2 rounded-lg bg-white/80 backdrop-blur-20 border border-white/60">Sleep / HRV</span>
+                  <span class="px-3 py-2 rounded-lg bg-white/80 backdrop-blur-20 border border-white/60">Activity</span>
+                  <span class="px-3 py-2 rounded-lg bg-white/80 backdrop-blur-20 border border-white/60">Voice (optional)</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="absolute -z-10 blur-3xl rounded-full w-64 h-64 bg-teal/30 left-1/2 -translate-x-1/2 top-10"></div>
+
+          <!-- Trans glow behind the phone -->
+          <div class="absolute -z-10 blur-3xl rounded-full w-64 h-64 left-1/2 -translate-x-1/2 top-10" style="background: radial-gradient(closest-side, rgba(168,216,240,0.55), rgba(242,185,197,0.40));"></div>
         </div>
       </div>
     </div>
@@ -107,30 +168,30 @@
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-2xl font-bold">Why TransitionTracker?</h2>
       <div class="mt-8 grid md:grid-cols-3 gap-6">
-        <div class="p-6 bg-white border rounded-2xl shadow-sm">
+        <div class="p-6 bg-white/70 backdrop-blur-20 border border-white/40 rounded-2xl shadow-glass gradient-border">
           <h3 class="font-semibold">For you</h3>
-          <p class="mt-2 text-sm text-indigo/80">See trends across mood, dysphoria, sleep, and more. Celebrate progress. Spot patterns. 自分を知る — know yourself.</p>
+          <p class="mt-2 text-sm text-slateink">See trends across mood, dysphoria, sleep, and more. Celebrate progress. Spot patterns. 自分を知る — know yourself.</p>
         </div>
-        <div class="p-6 bg-white border rounded-2xl shadow-sm">
+        <div class="p-6 bg-white/70 backdrop-blur-20 border border-white/40 rounded-2xl shadow-glass gradient-border">
           <h3 class="font-semibold">For community</h3>
-          <p class="mt-2 text-sm text-indigo/80">Opt‑in, anonymous contribution helps build better guidelines, with real‑world data from real lives.</p>
+          <p class="mt-2 text-sm text-slateink">Opt-in, anonymous contribution helps build better guidelines, with real-world data from real lives.</p>
         </div>
-        <div class="p-6 bg-white border rounded-2xl shadow-sm">
+        <div class="p-6 bg-white/70 backdrop-blur-20 border border-white/40 rounded-2xl shadow-glass gradient-border">
           <h3 class="font-semibold">For research</h3>
-          <p class="mt-2 text-sm text-indigo/80">Data schema co‑designed with academic partners so your contribution is genuinely useful — not just another dataset.</p>
+          <p class="mt-2 text-sm text-slateink">Data schema co-designed with academic partners so your contribution is genuinely useful — not just another dataset.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- How it works -->
-  <section id="how" class="py-16 bg-peach/30">
+  <section id="how" class="py-16">
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-2xl font-bold">How it works</h2>
       <ol class="mt-6 grid md:grid-cols-3 gap-6 text-sm">
-        <li class="p-6 bg-white rounded-2xl border shadow-sm"><span class="font-semibold">1) Opt‑in</span><br/>Choose exactly what to share. No raw audio, no GPS, no email.</li>
-        <li class="p-6 bg-white rounded-2xl border shadow-sm"><span class="font-semibold">2) Track</span><br/>Quick daily check‑ins + HealthKit metrics; optional weekly voice sample (derived features only).</li>
-        <li class="p-6 bg-white rounded-2xl border shadow-sm"><span class="font-semibold">3) Contribute</span><br/>Data is anonymized on export and encrypted in transit to approved research partners.</li>
+        <li class="p-6 bg-white/70 backdrop-blur-20 rounded-2xl border border-white/40 shadow-glass gradient-border"><span class="font-semibold">1) Opt-in</span><br/>Choose exactly what to share. No raw audio, no GPS, no email.</li>
+        <li class="p-6 bg-white/70 backdrop-blur-20 rounded-2xl border border-white/40 shadow-glass gradient-border"><span class="font-semibold">2) Track</span><br/>Quick daily check-ins + HealthKit metrics; optional weekly voice sample (derived features only).</li>
+        <li class="p-6 bg-white/70 backdrop-blur-20 rounded-2xl border border-white/40 shadow-glass gradient-border"><span class="font-semibold">3) Contribute</span><br/>Data is anonymized on export and encrypted in transit to approved research partners.</li>
       </ol>
     </div>
   </section>
@@ -140,44 +201,44 @@
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-2xl font-bold">Privacy by design</h2>
       <div class="mt-6 grid md:grid-cols-2 gap-6 text-sm">
-        <ul class="space-y-3">
+        <ul class="space-y-3 p-6 bg-white/70 backdrop-blur-20 rounded-2xl border border-white/40 shadow-glass gradient-border">
           <li>• <strong>No raw audio exported</strong> — only derived voice features (e.g., mean F0).</li>
           <li>• <strong>No GPS / IP / email</strong> in research exports.</li>
           <li>• <strong>Explicit consent</strong> at onboarding; revocable anytime.</li>
-          <li>• <strong>GDPR‑aligned</strong> anonymization and DUAs with partners.</li>
+          <li>• <strong>GDPR-aligned</strong> anonymization and DUAs with partners.</li>
         </ul>
-        <ul class="space-y-3">
+        <ul class="space-y-3 p-6 bg-white/70 backdrop-blur-20 rounded-2xl border border-white/40 shadow-glass gradient-border">
           <li>• <strong>Local encryption</strong> + encrypted transfer.</li>
           <li>• <strong>Transparency</strong> — see exactly what leaves your device.</li>
           <li>• <strong>Open docs</strong> — public data dictionary and changelog.</li>
-          <li>• <a href="/TransitionTracker_Data_Schema_Summary.pdf" class="underline hover:text-coral">Download schema summary (PDF)</a></li>
+          <li>• <a href="/TransitionTracker_Data_Schema_Summary.pdf" class="underline hover:text-graphite">Download schema summary (PDF)</a></li>
         </ul>
       </div>
     </div>
   </section>
 
   <!-- Research partners -->
-  <section id="research" class="py-16 bg-teal/10">
+  <section id="research" class="py-16">
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-2xl font-bold">For researchers</h2>
-      <p class="mt-3 text-sm text-indigo/80">We welcome collaboration on metrics, ethics, and analysis. Get the one‑pager below or contact us for DUAs/IRB alignment.</p>
+      <p class="mt-3 text-sm text-slateink">We welcome collaboration on metrics, ethics, and analysis. Get the one-pager below or contact us for DUAs/IRB alignment.</p>
       <div class="mt-6 flex flex-wrap gap-3">
-        <a href="/TransitionTracker_Cover_Letter.pdf" class="px-5 py-3 rounded-xl bg-indigo text-sand">Cover letter (PDF)</a>
-        <a href="/TransitionTracker_Data_Schema_Summary.pdf" class="px-5 py-3 rounded-xl bg-white border">Data schema (PDF)</a>
-        <a href="#contact" class="px-5 py-3 rounded-xl bg-coral text-white">Start a conversation</a>
+        <a href="/TransitionTracker_Cover_Letter.pdf" class="px-5 py-3 rounded-xl bg-white/80 backdrop-blur-20 text-graphite shadow-glass gradient-border hover:bg-white">Cover letter (PDF)</a>
+        <a href="/TransitionTracker_Data_Schema_Summary.pdf" class="px-5 py-3 rounded-xl bg-white/60 backdrop-blur-20 text-graphite shadow-glass hover:bg-white/70">Data schema (PDF)</a>
+        <a href="#contact" class="px-5 py-3 rounded-xl bg-white/80 backdrop-blur-20 text-graphite shadow-glass gradient-border hover:bg-white">Start a conversation</a>
       </div>
       <div class="mt-8 grid md:grid-cols-3 gap-6 text-sm">
-        <div class="p-5 bg-white border rounded-2xl">
+        <div class="p-5 bg-white/70 backdrop-blur-20 border border-white/40 rounded-2xl shadow-glass gradient-border">
           <div class="font-semibold">Data export</div>
-          <p class="mt-1 text-indigo/80">CSV/JSON, dictionary included; no direct identifiers; variable set versioned.</p>
+          <p class="mt-1 text-slateink">CSV/JSON, dictionary included; no direct identifiers; variable set versioned.</p>
         </div>
-        <div class="p-5 bg-white border rounded-2xl">
+        <div class="p-5 bg-white/70 backdrop-blur-20 border border-white/40 rounded-2xl shadow-glass gradient-border">
           <div class="font-semibold">Sampling</div>
-          <p class="mt-1 text-indigo/80">Daily self‑report + passive HealthKit; weekly derived voice features; monthly psychosocial.</p>
+          <p class="mt-1 text-slateink">Daily self-report + passive HealthKit; weekly derived voice features; monthly psychosocial.</p>
         </div>
-        <div class="p-5 bg-white border rounded-2xl">
+        <div class="p-5 bg-white/70 backdrop-blur-20 border border-white/40 rounded-2xl shadow-glass gradient-border">
           <div class="font-semibold">Governance</div>
-          <p class="mt-1 text-indigo/80">Participant consent, revocation, and public governance notes; partner IRB oversight.</p>
+          <p class="mt-1 text-slateink">Participant consent, revocation, and public governance notes; partner IRB oversight.</p>
         </div>
       </div>
     </div>
@@ -188,42 +249,44 @@
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-2xl font-bold">FAQ</h2>
       <div class="mt-6 grid md:grid-cols-2 gap-6 text-sm">
-        <div class="p-5 bg-white border rounded-2xl">
+        <div class="p-5 bg-white/70 backdrop-blur-20 border border-white/40 rounded-2xl shadow-glass gradient-border">
           <div class="font-semibold">Is my data anonymous?</div>
-          <p class="mt-1 text-indigo/80">Yes. We export only anonymized data: no names, emails, IP, or GPS. Voice exports are derived features only.</p>
+          <p class="mt-1 text-slateink">Yes. We export only anonymized data: no names, emails, IP, or GPS. Voice exports are derived features only.</p>
         </div>
-        <div class="p-5 bg-white border rounded-2xl">
+        <div class="p-5 bg-white/70 backdrop-blur-20 border border-white/40 rounded-2xl shadow-glass gradient-border">
           <div class="font-semibold">Can I opt out later?</div>
-          <p class="mt-1 text-indigo/80">Absolutely. You can revoke research sharing at any time from Settings → Privacy.</p>
+          <p class="mt-1 text-slateink">Absolutely. You can revoke research sharing at any time from Settings → Privacy.</p>
         </div>
-        <div class="p-5 bg-white border rounded-2xl">
+        <div class="p-5 bg-white/70 backdrop-blur-20 border border-white/40 rounded-2xl shadow-glass gradient-border">
           <div class="font-semibold">Who sees the data?</div>
-          <p class="mt-1 text-indigo/80">Only vetted research partners under a Data Use Agreement and IRB oversight.</p>
+          <p class="mt-1 text-slateink">Only vetted research partners under a Data Use Agreement and IRB oversight.</p>
         </div>
-        <div class="p-5 bg-white border rounded-2xl">
+        <div class="p-5 bg-white/70 backdrop-blur-20 border border-white/40 rounded-2xl shadow-glass gradient-border">
           <div class="font-semibold">Do you share results back?</div>
-          <p class="mt-1 text-indigo/80">We aim for open summaries and community‑readable findings whenever partners can share.</p>
+          <p class="mt-1 text-slateink">We aim for open summaries and community-readable findings whenever partners can share.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section id="cta" class="py-16 bg-indigo text-sand">
+  <section id="cta" class="py-16">
     <div class="max-w-6xl mx-auto px-4">
-      <div class="grid md:grid-cols-2 gap-8 items-center">
-        <div>
-          <h2 class="text-3xl font-bold">Be first to know</h2>
-          <p class="mt-2 text-sand/80">Join the early access list. No spam — just meaningful updates and opt‑in invitations.</p>
+      <div class="bg-white/70 backdrop-blur-20 rounded-3xl border border-white/40 shadow-glass gradient-border p-8">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <h2 class="text-3xl font-bold">Be first to know</h2>
+            <p class="mt-2 text-slateink">Join the early access list. No spam — just meaningful updates and opt-in invitations.</p>
+          </div>
+          <form class="bg-white/60 backdrop-blur-20 p-4 rounded-2xl border border-white/50" netlify name="waitlist" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="waitlist">
+            <input type="text" name="bot-field" class="hidden" />
+            <label class="block text-sm mb-2" for="email">Email</label>
+            <input id="email" name="email" type="email" required class="w-full px-4 py-3 rounded-xl text-graphite border border-white/60 bg-white/90" placeholder="you@example.com" />
+            <button type="submit" class="mt-3 w-full px-4 py-3 rounded-xl bg-white/80 backdrop-blur-20 text-graphite shadow-glass gradient-border hover:bg-white">Join waitlist</button>
+            <p class="mt-2 text-xs text-slateink">By submitting, you agree to our <a href="#privacy" class="underline">privacy notice</a>.</p>
+          </form>
         </div>
-        <form class="bg-white/10 backdrop-blur p-4 rounded-2xl" netlify name="waitlist" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="waitlist">
-          <input type="text" name="bot-field" class="hidden" />
-          <label class="block text-sm mb-2" for="email">Email</label>
-          <input id="email" name="email" type="email" required class="w-full px-4 py-3 rounded-xl text-indigo border border-sand/40 bg-white" placeholder="you@example.com" />
-          <button type="submit" class="mt-3 w-full px-4 py-3 rounded-xl bg-coral text-white">Join waitlist</button>
-          <p class="mt-2 text-xs text-sand/80">By submitting, you agree to our <a href="#privacy" class="underline">privacy notice</a>.</p>
-        </form>
       </div>
     </div>
   </section>
@@ -232,31 +295,32 @@
   <section id="contact" class="py-16">
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-2xl font-bold">Contact</h2>
-      <p class="mt-2 text-sm text-indigo/80">Researchers: request the data dictionary, DUAs, or an intro call. Media: request the press kit.</p>
+      <p class="mt-2 text-sm text-slateink">Researchers: request the data dictionary, DUAs, or an intro call. Media: request the press kit.</p>
       <div class="mt-4 flex flex-wrap gap-3 text-sm">
-        <a class="px-5 py-3 rounded-xl bg-white border" href="mailto:hello@transitiontracker.app">hello@transitiontracker.app</a>
-        <a class="px-5 py-3 rounded-xl bg-white border" href="/press-kit.zip">Press kit</a>
+        <a class="px-5 py-3 rounded-xl bg-white/80 backdrop-blur-20 border border-white/50 shadow-glass gradient-border" href="mailto:hello@transitiontracker.app">hello@transitiontracker.app</a>
+        <a class="px-5 py-3 rounded-xl bg-white/70 backdrop-blur-20 border border-white/50 shadow-glass" href="/press-kit.zip">Press kit</a>
       </div>
     </div>
   </section>
 
-  <section id="privacy-policy" class="py-16 max-w-6xl mx-auto px-4 text-sm text-indigo/80">
-    <h2>Privacy Policy</h2>
-    <p>We ensure your data remains anonymous and that you can revoke consent at any time. Your privacy is our priority.</p>
+  <!-- Simple legal placeholders -->
+  <section id="privacy-policy" class="py-16 max-w-6xl mx-auto px-4 text-sm text-slateink">
+    <h2 class="font-semibold text-graphite">Privacy Policy</h2>
+    <p class="mt-2">We ensure your data remains anonymous and that you can revoke consent at any time. Your privacy is our priority.</p>
   </section>
 
-  <section id="terms" class="py-16 max-w-6xl mx-auto px-4 text-sm text-indigo/80">
-    <h2>Terms of Use</h2>
-    <p>This app is provided as-is with no warranties. Use it responsibly and understand that we are not liable for any issues arising from its use.</p>
+  <section id="terms" class="py-16 max-w-6xl mx-auto px-4 text-sm text-slateink">
+    <h2 class="font-semibold text-graphite">Terms of Use</h2>
+    <p class="mt-2">This app is provided as-is with no warranties. Use it responsibly and understand that we are not liable for any issues arising from its use.</p>
   </section>
 
-  <footer class="py-10 border-t border-indigo/10">
-    <div class="max-w-6xl mx-auto px-4 text-xs text-indigo/70 flex flex-wrap items-center justify-between gap-3">
+  <footer class="py-10 border-t border-white/30 backdrop-blur-20 bg-white/40">
+    <div class="max-w-6xl mx-auto px-4 text-xs text-slateink flex flex-wrap items-center justify-between gap-3">
       <div>© <span id="year"></span> TransitionTracker • Built with privacy first • Barcelona</div>
       <div class="flex gap-4">
-        <a href="#privacy" class="hover:text-coral">Privacy</a>
-        <a href="#research" class="hover:text-coral">Research</a>
-        <a href="#cta" class="hover:text-coral">Updates</a>
+        <a href="#privacy" class="hover:text-graphite">Privacy</a>
+        <a href="#research" class="hover:text-graphite">Research</a>
+        <a href="#cta" class="hover:text-graphite">Updates</a>
       </div>
     </div>
   </footer>
