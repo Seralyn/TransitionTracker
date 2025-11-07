@@ -99,6 +99,20 @@
       box-shadow: 0 12px 32px rgba(17,24,39,.12);
     }
 
+    /* device frame: continuous outline without gradient pseudo-element */
+    .device{
+      border-radius: 2rem;
+      /* keep frosted look consistent with .liquid */
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(255,255,255,.75);      /* bright outer edge */
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
+      /* subtle inner gray ring + regular shadow */
+      box-shadow:
+        inset 0 0 0 1px rgba(31,36,48,.06),         /* soft gray inner outline */
+        0 18px 55px rgba(17,24,39,.16);             /* depth */
+    }
+
     /* gradient micro-border (hairline) */
     .g-border{ position:relative; }
     .g-border::after{
@@ -159,7 +173,7 @@
 
         <!-- Phone mock: keeps the “onboarding • opt-in” look and ready for a real screenshot -->
         <div class="relative">
-          <div class="aspect-[9/19] w-72 md:w-80 mx-auto rounded-[2rem] liquid g-border p-3">
+          <div class="aspect-[9/19] w-72 md:w-80 mx-auto rounded-[2rem] liquid device p-3">
             <div class="h-full w-full rounded-[1.6rem] liquid-soft p-6 flex items-center justify-center text-center">
               <div class="max-w-[15rem] mx-auto">
                 <div class="text-sm tracking-widest text-softText uppercase">Onboarding • Opt-in</div>
